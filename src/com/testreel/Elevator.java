@@ -92,10 +92,10 @@ public class Elevator implements Runnable {
         }
         this.elevatorControlSystem.removeStop(floor, this.isGoingUp);
         if(this.isGoingUp){
-            pauseThread(floor - currentFloor);
+//            pauseThread(floor - currentFloor);
             System.out.println("Elevator " + this.elevatorId + " has moved to floor " + this.currentFloor);
         } else {
-            pauseThread(currentFloor - floor);
+//            pauseThread(currentFloor - floor);
             System.out.println("Elevator " + this.elevatorId + " has moved to floor " + this.currentFloor);
         }
         this.currentFloor = floor;
@@ -149,7 +149,7 @@ public class Elevator implements Runnable {
                 this.isGoingUp = false;
                 this.currentFloor = this.floors.length;
                 next = this.downRequests.lower(this.currentFloor);
-                boolean hasNextRequestFromLowerFloor = next != null;
+                boolean hasNextRequestFromLowerFloor = next != null && next > MIN_FLOOR;
                 if (hasNextRequestFromLowerFloor){
                     System.out.println("Elevator " + this.elevatorId + " going up processes request from rider to go down to floor " + next + " from floor " + this.currentFloor);
                     return next;
@@ -159,14 +159,14 @@ public class Elevator implements Runnable {
             }
         } else {
             Integer next = this.downRequests.lower(this.currentFloor);
-            boolean hasNext = next != null;
+            boolean hasNext = next != null && next > MIN_FLOOR;
             if (hasNext){
                 System.out.println("Elevator " + this.elevatorId + " going down processes request from rider to go down to floor " + next + " from floor " + this.currentFloor);
                 return next;
             } else {
                 this.isGoingUp = true;
                 this.currentFloor = MIN_FLOOR;
-                next = this.upRequests.higher(-1);
+                next = this.upRequests.higher(0);
                 boolean hasNextRequestFromHigherFloor = next != null && next >= MIN_FLOOR;
                 if (hasNextRequestFromHigherFloor){
                     System.out.println("Elevator " + this.elevatorId + "  going down processes request from rider to go up to floor " + next + " from floor " + this.currentFloor);
