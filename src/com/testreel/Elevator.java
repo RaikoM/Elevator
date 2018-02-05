@@ -93,10 +93,10 @@ public class Elevator implements Runnable {
         this.elevatorControlSystem.removeStop(floor, this.isGoingUp);
         if(this.isGoingUp){
             pauseThread(floor - currentFloor);
-            System.out.println("Elevator " + this.elevatorId + " has moved to floor " + this.currentFloor);
+            System.out.println("Elevator " + this.elevatorId + " has moved to floor " + floor);
         } else {
             pauseThread(currentFloor - floor);
-            System.out.println("Elevator " + this.elevatorId + " has moved to floor " + this.currentFloor);
+            System.out.println("Elevator " + this.elevatorId + " has moved to floor " + floor);
         }
         this.currentFloor = floor;
 
