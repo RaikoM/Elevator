@@ -89,7 +89,7 @@ public class Elevator implements Runnable {
         } else {
             this.downRequests.remove(floor);
         }
-        this.currentFloor = floor;
+
         this.elevatorControlSystem.removeStop(floor, this.isGoingUp);
         if(this.isGoingUp){
             pauseThread(floor - currentFloor);
@@ -98,6 +98,7 @@ public class Elevator implements Runnable {
             pauseThread(currentFloor - floor);
             System.out.println("Elevator " + this.elevatorId + " has moved to floor " + this.currentFloor);
         }
+        this.currentFloor = floor;
 
     }
 
