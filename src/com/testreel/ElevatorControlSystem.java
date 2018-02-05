@@ -68,15 +68,15 @@ public class ElevatorControlSystem {
     private Elevator call(int fromFloor, boolean isGoingUp, int riderId){
         Elevator elevator = find(fromFloor, isGoingUp);
         if (isGoingUp){
-            if (fromFloor < 13){
-                System.out.println("Elevator " + elevator.getElevatorId() +  " called by rider " + riderId + " on floor " + fromFloor +" to go up");
+            if ((fromFloor + 1) < 13){
+                System.out.println("Elevator " + elevator.getElevatorId() +  " called by rider " + riderId + " on floor " + (fromFloor + 1) +" to go up");
             } else {
                 System.out.println("Can't go up from floor " + fromFloor);
             }
 
         } else {
-            if (fromFloor > 1){
-                System.out.println("Elevator " + elevator.getElevatorId() +  " called by rider " + riderId + " on floor " + fromFloor +" to go down");
+            if ((fromFloor + 1) > 1){
+                System.out.println("Elevator " + elevator.getElevatorId() +  " called by rider " + riderId + " on floor " + (fromFloor + 1) +" to go down");
             } else {
                 System.out.println("Can't go down from floor " + fromFloor);
             }
